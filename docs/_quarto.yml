@@ -1,0 +1,7 @@
+format:
+  html: {toc: true, toc-depth: 4, theme: spacelab}
+  revealjs: {theme: solarized, navigation-mode: vertical, transition: slide, background-transition: fade, incremental: true}
+project: {type: book}
+book:
+  title: Support Vector Machine
+  chapters: [index.qmd, assignment.islp_9_5.qmd, assignment.islp_9_7.qmd]
