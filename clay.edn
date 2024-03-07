@@ -1,5 +1,5 @@
 {
- ;:remote-repo {:git-url "https://github.com/adabwana/decision-trees" :branch "main"}
+ :remote-repo {:git-url "https://github.com/adabwana/support-vector-machine" :branch "main"}
  :base-target-path "docs"
  ;:base-source-path "src"
  :subdirs-to-sync  ["notebooks" "data"]

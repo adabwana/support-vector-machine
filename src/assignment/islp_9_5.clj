@@ -530,3 +530,4 @@
 (evaluate-predictions (preds svm-poly) (actual svm-poly))
 
 ;(i) Comment on your results.
+; `Linear` and `Sigmoid` kernels in our SVM models perform poorly on certain polynomial relationships. We can model those relationships "linearly" by creating polynomial regressors in our model. Another way is to use different SVM kernel functions. `Scikit-learn`'s default kernel function--`RBF`--provided a nice non-linear option. Also, the `poly` kernel was able to identify that degree two is the appropriate power for our data. `RBF` and `poly` performed similarly on our data, while `poly` is the best choice with a Kappa score of 0.98.
