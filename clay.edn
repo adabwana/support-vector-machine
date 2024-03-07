@@ -1,0 +1,37 @@
+{
+ ;:remote-repo {:git-url "https://github.com/adabwana/decision-trees" :branch "main"}
+ :base-target-path "docs"
+ ;:base-source-path "src"
+ :subdirs-to-sync  ["notebooks" "data"]
+ :format           [:html]
+ :show             true
+ :run-quarto       true
+ :quarto           {:format
+                    {:html     {:toc       true
+                                :toc-depth 4
+                                :theme     :spacelab}
+                     :revealjs {:theme                 :solarized
+                                :navigation-mode       :vertical
+                                :transition            :slide
+                                :background-transition :fade
+                                :incremental           true}}
+                    :code-block-background true
+                    :include-in-header     {:text "<link rel = \"icon\" href = \"data:,\" />"}}
+ :kindly/options   {:datatables {:paging          false
+                                 :scrollY         400
+                                 :sPaginationType "full_numbers"
+                                 :order           []}}}
+
+;{
+; ;:remote-repo {:git-url "https://github.com/adabwana/decision-trees" :branch "master"}
+; :quarto {:format
+;          {:html {:theme     {:dark  "cyborg"
+;                              :light "yeti"}
+;
+;                  ;:number-sections false
+;                  :toc       true
+;                  :toc-depth 4}}
+;          ;:highlight-style       :nord
+;          :code-block-background true
+;          :base-target-path      "temp"                     ;what it do?
+;          :include-in-header     {:text "<link rel = \"icon\" href = \"data:,\" />"}}}

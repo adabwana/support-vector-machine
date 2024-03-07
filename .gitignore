@@ -1,0 +1,9 @@
+.*/
+.*
+!.gitignore
+
+docs/
+
+*.iml
+README.md
+index.md
