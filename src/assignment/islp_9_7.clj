@@ -15,8 +15,8 @@
   (clojure.java.shell/sh "which" "R"))
 
 ;; # ISLP Ch9 Q7
-; In this problem, you will use support vector approaches in order to predict whether a given car gets high or low gas mileage based on the Auto data set.
-; (a) Create a binary variable that takes on a 1 for cars with gas mileage above the median, and a 0 for cars with gas mileage below the median.
+; 7) In this problem, you will use support vector approaches in order to predict whether a given car gets high or low gas mileage based on the Auto data set.
+;> (a) Create a binary variable that takes on a 1 for cars with gas mileage above the median, and a 0 for cars with gas mileage below the median.
 ; ## Binary response
 ; Load the required R libraries
 (require-r '[base :refer [RNGkind set-seed summary plot $ expand-grid which-max subset
@@ -56,7 +56,7 @@
 
 (summary auto-cat)
 
-;; (b) Fit a support vector classifier to the data with various values of C, in order to predict whether a car gets high or low gas mileage. Report the cross-validation errors associated with different values of this parameter. Comment on your results. Note you will need to fit the classifier without the gas mileage variable to produce sensible results
+;;> (b) Fit a support vector classifier to the data with various values of C, in order to predict whether a car gets high or low gas mileage. Report the cross-validation errors associated with different values of this parameter. Comment on your results. Note you will need to fit the classifier without the gas mileage variable to produce sensible results
 ;; ## Fit SVMs
 ;; Partition data
 (def index
@@ -100,7 +100,7 @@
 
 ; I measured the goodness-of-fit versus errors. For each C, R built 20 bootstraped linear SVM models. The best Kappa per C is reported.  Based on Kappa, $C = 0.035$ is best.
 
-;; (c) Now repeat (b), this time using SVMs with radial and polynomial basis kernels, with different values of gamma and degree and C. Comment on your results.
+;;> (c) Now repeat (b), this time using SVMs with radial and polynomial basis kernels, with different values of gamma and degree and C. Comment on your results.
 ; ## SVM radial and polynomial
 ; ### svmRadial
 (RNGkind :sample.kind "Rounding")
@@ -200,7 +200,7 @@
 ;; ### Cross-validation errors
 ($ svm-poly 'results)
 
-;; (d) Make some plots to back up your assertions in (b) and (c).
+;;> (d) Make some plots to back up your assertions in (b) and (c).
 ;; ## Plots
 ^kind/html
 (-> (plot svm-linear :metric "Kappa")

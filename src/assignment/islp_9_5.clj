@@ -28,8 +28,9 @@
     [scicloj.sklearn-clj.ml]))
 
 ;; # ISLP Ch9 Q5
-; 5. We have seen that we can ft an SVM with a non-linear kernel in order to perform classification using a non-linear decision boundary. We will now see that we can also obtain a non-linear decision boundary by performing logistic regression using non-linear transformations of the features.
-; (a) Generate a data set with n = 500 and p = 2, such that the observations belong to two classes with a quadratic decision boundary between them.
+;5) We have seen that we can ft an SVM with a non-linear kernel in order to perform classification using a non-linear decision boundary. We will now see that we can also obtain a non-linear decision boundary by performing logistic regression using non-linear transformations of the features.
+
+;> (a) Generate a data set with n = 500 and p = 2, such that the observations belong to two classes with a quadratic decision boundary between them.
 ; ## Generate Data
 (defn generate-data [len]
   (let [rng (r/rng :isaac 0)
@@ -47,7 +48,7 @@
 (tc/head data)
 (tc/info data)
 
-; (b) Plot the observations, colored according to their class labels. Your plot should display X1 on the x-axis, and X2 on the y-axis.
+;> (b) Plot the observations, colored according to their class labels. Your plot should display X1 on the x-axis, and X2 on the y-axis.
 ; ## Plot data
 ^kind/vega-lite
 (let [plot (tc/rows data :as-maps)]
@@ -67,7 +68,7 @@
                     :COLOR "y"
                     :CTYPE "nominal"})))
 
-;; (c) Fit a logistic regression model to the data, using X1 and X2 as predictors.
+;;> (c) Fit a logistic regression model to the data, using X1 and X2 as predictors.
 ; ## Logistic regression
 (def response :y)
 (def regressors
@@ -206,7 +207,7 @@
            (train-test data))))
 
 
-; (d) Apply this model to the training data in order to obtain a predicted class label for each training observation. Plot the observations, colored according to the predicted class labels. The decision boundary should be linear.
+;> (d) Apply this model to the training data in order to obtain a predicted class label for each training observation. Plot the observations, colored according to the predicted class labels. The decision boundary should be linear.
 ; ## Visualize model fit
 ; Function to get the best model's training data.
 (defn model->data [model]
@@ -275,7 +276,7 @@
 ^kind/dataset
 (evaluate-predictions (preds logistic-model) (actual logistic-model))
 
-;; (e) Now fit a logistic regression model to the data using non-linear  functions of X$_1$ and X$_2$ as predictors (e.g. $X_1^2$, $X_1*X_2$, $log(X_2)$, and so forth)
+;;> (e) Now fit a logistic regression model to the data using non-linear  functions of X$_1$ and X$_2$ as predictors (e.g. $X_1^2$, $X_1*X_2$, $log(X_2)$, and so forth)
 ; ## Non-linear regressors
 ; Making pipelines (like `vanilla`) to apply to `evaluate-models`
 (def pipeline-squared
@@ -373,7 +374,7 @@
 ^kind/dataset
 (evaluate-predictions (preds logistic-combined) (actual logistic-combined))
 
-;(f) Apply this model to the training data in order to obtain a predicted class label for each training observation. Plot the observations, colored according to the predicted class labels. The decision boundary should be obviously non-linear. If it is not, then repeat (a)–(e) until you come up with an example in which the predicted class labels are obviously non-linear.
+;> (f) Apply this model to the training data in order to obtain a predicted class label for each training observation. Plot the observations, colored according to the predicted class labels. The decision boundary should be obviously non-linear. If it is not, then repeat (a)–(e) until you come up with an example in which the predicted class labels are obviously non-linear.
 ; ## Non-linear logistic visualization
 (def data-plot
   (tc/add-or-replace-column data :y (preds logistic-interact)))
@@ -397,7 +398,7 @@
               :y     {:field :x2 :type "quantitative"}
               :color {:field :y :type "nominal"}}})
 
-;(g) Fit a support vector classifer to the data with X1 and X2 as predictors. Obtain a class prediction for each training observation. Plot the observations, colored according to the predicted class labels.
+;> (g) Fit a support vector classifer to the data with X1 and X2 as predictors. Obtain a class prediction for each training observation. Plot the observations, colored according to the predicted class labels.
 ; ## Support vector visualization
 ; Many issues with sklearn. One of which, major parameter "C" cost, does not work.
 (comment
@@ -471,7 +472,7 @@
               :y     {:field :x2 :type "quantitative"}
               :color {:field :y :type "nominal"}}})
 
-; (h) Fit a SVM using a non-linear kernel to the data. Obtain a class prediction for each training observation. Plot the observations,colored according to the predicted class labels
+;> (h) Fit a SVM using a non-linear kernel to the data. Obtain a class prediction for each training observation. Plot the observations,colored according to the predicted class labels
 ; ## Non-linear kernels
 ; Already made in the last question, now extract from the `svm-models` collection.
 (def svm-rbf
@@ -529,6 +530,6 @@
 ^kind/dataset
 (evaluate-predictions (preds svm-poly) (actual svm-poly))
 
-;(i) Comment on your results.
+;> (i) Comment on your results.
 
-;> `Linear` and `Sigmoid` kernels in our SVM models perform poorly on certain polynomial relationships. We can model those relationships "linearly" by creating polynomial regressors in our model. Another way is to use different SVM kernel functions. `Scikit-learn`'s default kernel function--`RBF`--provided a nice non-linear option. Also, the `poly` kernel was able to identify that degree two is the appropriate power for our data. `RBF` and `poly` performed similarly on our data, while `poly` is the best choice with a Kappa score of 0.98.
+;`Linear` and `Sigmoid` kernels in our SVM models perform poorly on certain polynomial relationships. We can model those relationships "linearly" by creating polynomial regressors in our model. Another way is to use different SVM kernel functions. `Scikit-learn`'s default kernel function--`RBF`--provided a nice non-linear option. Also, the `poly` kernel was able to identify that degree two is the appropriate power for our data. `RBF` and `poly` performed similarly on our data, while `poly` is the best choice with a Kappa score of 0.98.
